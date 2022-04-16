@@ -1,15 +1,35 @@
-import { Flex, Heading, HStack, Image } from "@chakra-ui/react";
+import { Flex, Heading, Image, toast, useToast } from "@chakra-ui/react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import type { RouteObject } from "react-router-dom";
 import { Form } from "../../components";
+import Utils from "../../utils";
 
-function Home() {
+type HomePropsType = {};
+function Home({}: HomePropsType) {
+  let navigate = useNavigate();
+  const toast = useToast();
   const [isLoading, setLoading] = useState(false);
+  false;
 
   const handleSubmit = (values: any) => {
     setLoading(true);
-    console.log({ values });
+    const isValid = Utils.handleValidadeValues(values);
+    if (isValid) {
+      setLoading(false);
+      toast({
+        title: "Ops, tem alguma coisa errada!",
+        status: "error",
+        description: "Todos os campos devem ser preenchidos.",
+        duration: 3000,
+        isClosable: true,
+        position: "top-right",
+      });
+      return;
+    }
     setTimeout(() => {
       setLoading(false);
+      navigate("/certificates", { state: { values } });
     }, 2000);
   };
   return (
