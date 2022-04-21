@@ -1,6 +1,14 @@
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 
+// Create a function using date-fns that get current Year.
+const getCurrentYear = () => {
+  const currentYear = format(new Date(), "yyyy", {
+    locale: ptBR,
+  });
+  return currentYear;
+};
+
 const handleFormatDate = (date: Date) => {
   const formattedDate = format(new Date(date), "dd/MM/yyyy", {
     locale: ptBR,
@@ -20,4 +28,5 @@ const handleValidadeValues = (values: any) => {
   }
   return true;
 };
-export default { handleFormatDate, handleValidadeValues };
+
+export default { handleFormatDate, handleValidadeValues, getCurrentYear };

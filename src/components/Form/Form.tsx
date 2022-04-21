@@ -1,5 +1,6 @@
 import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
+import { Icon, Image } from "@chakra-ui/react";
 import { ptBR } from "date-fns/locale";
 import { useState } from "react";
 import {
@@ -18,24 +19,40 @@ import {
 import Utils from "../../utils";
 
 type FormPropsType = {
-  onSubmit: (values: any) => void;
-  isLoading: boolean;
+  studentName: string;
+  teacherName: string;
+  courseName: string;
+  duration: string;
+  setStudentName: (value: string) => void;
+  setTeacherName: (value: string) => void;
+  setCourseName: (value: string) => void;
+  setDuration: (value: string) => void;
+  setStartDate: (value: any) => void;
+  setEndDate: (value: any) => void;
+  startDate: {
+    formattedDate: string;
+    date: Date;
+  };
+  endDate: {
+    formattedDate: string;
+    date: Date;
+  };
 };
 
-function Form({ onSubmit, isLoading }: FormPropsType) {
-  const [studentName, setStudentName] = useState("");
-  const [teacherName, setTeacherName] = useState("");
-  const [courseName, setCourseName] = useState("");
-  const [duration, setDuration] = useState("10");
-  const [startDate, setStartDate] = useState({
-    formattedDate: "",
-    date: new Date(),
-  });
-  const [endDate, setEndDate] = useState({
-    formattedDate: "",
-    date: new Date(),
-  });
-
+function Form({
+  studentName,
+  teacherName,
+  courseName,
+  duration,
+  setStudentName,
+  setTeacherName,
+  setCourseName,
+  setDuration,
+  setEndDate,
+  setStartDate,
+  startDate,
+  endDate,
+}: FormPropsType) {
   const handleStatDate = (date: Date) => {
     const formattedDate = Utils.handleFormatDate(date);
     setStartDate(formattedDate);
@@ -46,33 +63,24 @@ function Form({ onSubmit, isLoading }: FormPropsType) {
     setEndDate(formattedDate);
   };
 
-  const handleSubmit = () => {
-    onSubmit({
-      studentName,
-      teacherName,
-      courseName,
-      duration,
-      startDate: startDate.formattedDate,
-      endDate: endDate.formattedDate,
-    });
-  };
-
   return (
-    <Flex mt={8} w='3xl' flexDirection='column' gap={4}>
+    <Flex mt={2} w='md' flexDirection='column' gap={4}>
       <FormControl isRequired>
         <FormLabel fontSize={12} color='brand.base' htmlFor='student'>
-          Nome do aluno
+          Nome do(a) estudante
         </FormLabel>
         <Input
           variant='outline'
+          value={studentName}
           borderColor='#ababab'
-          placeholder='Insira o nome do aluno:'
-          onChange={(e) => setStudentName(e.target.value.trim())}
+          placeholder='Insira o nome do(a) estudante'
+          onChange={(e) => setStudentName(e.target.value)}
           _placeholder={{
             color: "brand.baseOff",
-            fontSize: "sm",
+            fontSize: "12px",
             fontWeight: "thin",
           }}
+          fontSize='12px'
           focusBorderColor='brand.details'
           color='brand.base'
           id='student'
@@ -81,17 +89,19 @@ function Form({ onSubmit, isLoading }: FormPropsType) {
       </FormControl>
       <FormControl isRequired>
         <FormLabel fontSize={12} color='brand.base' htmlFor='teacher'>
-          Nome do Professor
+          Nome do professor(a)
         </FormLabel>
         <Input
-          onChange={(e) => setTeacherName(e.target.value.trim())}
-          placeholder=' Insira o nome do Professor'
+          value={teacherName}
+          onChange={(e) => setTeacherName(e.target.value)}
+          placeholder=' Insira o nome do(a) professor(a)'
           variant='outline'
           _placeholder={{
             color: "brand.baseOff",
-            fontSize: "sm",
+            fontSize: "12px",
             fontWeight: "thin",
           }}
+          fontSize='12px'
           focusBorderColor='brand.details'
           color='brand.base'
           borderColor='#ababab'
@@ -102,63 +112,69 @@ function Form({ onSubmit, isLoading }: FormPropsType) {
       <Flex gap={2}>
         <FormControl isRequired>
           <FormLabel fontSize={12} color='brand.base' htmlFor='course'>
-            Nome do Curso
+            Nome do curso
           </FormLabel>
           <Input
-            onChange={(e) => setCourseName(e.target.value.trim())}
+            value={courseName}
+            onChange={(e) => setCourseName(e.target.value)}
             variant='outline'
             borderColor='#ababab'
-            placeholder='Insira o nome do Curso:'
+            placeholder='Insira o nome do curso'
             _placeholder={{
               color: "brand.baseOff",
-              fontSize: "sm",
+              fontSize: "12px",
               fontWeight: "thin",
             }}
             focusBorderColor='brand.details'
             color='brand.base'
+            fontSize='12px'
             id='course'
             type='course'
           />
         </FormControl>
       </Flex>
+
       <Flex gap={2}>
-        <FormControl isRequired maxW='xs'>
+        <FormControl isRequired w='sm'>
           <FormLabel fontSize={12} color='brand.base' htmlFor='duration'>
-            Duração do curso em horas:
+            Duração em horas
           </FormLabel>
           <NumberInput
+            value={duration}
             onChange={(value) => setDuration(value)}
-            defaultValue={duration}
+            defaultValue={10}
             min={1}
+            fontSize='12px'
             focusBorderColor='brand.details'
             color='brand.base'
             borderColor='#ababab'
           >
-            <NumberInputField />
+            <NumberInputField fontSize='12px' />
             <NumberInputStepper>
               <NumberIncrementStepper color='brand.base' />
               <NumberDecrementStepper color='brand.base' />
             </NumberInputStepper>
           </NumberInput>
         </FormControl>
-        <FormControl isRequired>
+        <FormControl isRequired w='sm'>
           <FormLabel fontSize={12} color='brand.base' htmlFor='teacher'>
-            Data de inicio do curso:
+            Data de início
           </FormLabel>
           <DatePicker
             locale={ptBR}
             dateFormat='dd/MM/yyyy'
-            selected={startDate.date}
             onChange={handleStatDate}
+            selected={startDate.date}
             customInput={
               <Input
                 variant='outline'
                 borderColor='#ababab'
                 _placeholder={{
                   color: "brand.baseOff",
-                  fontSize: "sm",
+                  fontSize: "12px",
                   fontWeight: "thin",
                 }}
+                fontSize='12px'
                 focusBorderColor='brand.details'
                 color='brand.base'
                 id='course'
@@ -167,12 +183,15 @@ function Form({ onSubmit, isLoading }: FormPropsType) {
             }
           />
         </FormControl>
-        <FormControl isRequired>
+        <FormControl isRequired w='sm'>
           <FormLabel fontSize={12} color='brand.base' htmlFor='teacher'>
-            Data de conclusão do curso:
+            Data de conclusão
           </FormLabel>
           <DatePicker
             locale={ptBR}
+            selected={endDate.date}
+            dateFormat='dd/MM/yyyy'
+            onChange={handleEndDate}
             customInput={
               <Input
                 variant='outline'
@@ -180,29 +199,36 @@ function Form({ onSubmit, isLoading }: FormPropsType) {
                 placeholder='Insira o nome do Curso:'
                 _placeholder={{
                   color: "brand.baseOff",
-                  fontSize: "sm",
+                  fontSize: "12px",
                   fontWeight: "thin",
                 }}
                 focusBorderColor='brand.details'
                 color='brand.base'
                 id='course'
+                fontSize='12px'
                 type='course'
               />
             }
-            dateFormat='dd/MM/yyyy'
-            selected={endDate.date}
-            onChange={handleEndDate}
           />
         </FormControl>
       </Flex>
-      <Button
-        onClick={handleSubmit}
-        isLoading={isLoading}
-        mt={4}
-        bg='brand.details'
-      >
-        Gerar Certificado
-      </Button>
+
+      <Flex gap={4} width='100%' mt={4}>
+        <Button
+          fontSize='12px'
+          bg='brand.details'
+          leftIcon={<Image width={15} src='/assets/file-text.svg' />}
+        >
+          Baixar em PDF
+        </Button>
+        <Button
+          fontSize='12px'
+          bg='brand.details'
+          leftIcon={<Image width={15} src='/assets/image.svg' />}
+        >
+          Baixar em JPG
+        </Button>
+      </Flex>
     </Flex>
   );
 }
