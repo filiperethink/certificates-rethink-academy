@@ -103,6 +103,7 @@ const colors = {
     base: "#FFFFFF",
     baseOff: "#F1f1f1",
     bg: "#343434",
+    bgOff: "#85858521",
   },
 };
 

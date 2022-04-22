@@ -910,6 +910,26 @@
   resolved "https://registry.npmjs.org/@emotion/weak-memoize/-/weak-memoize-0.2.5.tgz"
   integrity sha512-6U71C2Wp7r5XtFtQzYrW5iKFT67OixrSxjI4MptCHzdSVlgabczzqLe0ZSgnub/5Kp4hSbpDB1tMytZY9pwxxA==
 
+"@fontsource/arizonia@^4.5.6":
+  version "4.5.6"
+  resolved "https://registry.yarnpkg.com/@fontsource/arizonia/-/arizonia-4.5.6.tgz#98d5da409976df7b57efe13c109233b778d71bc6"
+  integrity sha512-PM4LXxcbHg1PWo9Ry3b+SoLFwvJxK7J9pQJpVsXg7KLxcqg2/ahqLuhfe/s2ZnnUgw9Z305HffSORbxNArAerw==
+
+"@fontsource/clicker-script@^4.5.7":
+  version "4.5.7"
+  resolved "https://registry.yarnpkg.com/@fontsource/clicker-script/-/clicker-script-4.5.7.tgz#6c52656d311ec95987b58014efde9811e8fed2d0"
+  integrity sha512-029fyGlkF6bd4ySW2uduWIi0Ub9Ut5OcD69jh/P+GRChJhafgAKjHnJgm4ugLXThNJssPKAr+rCiE7axqTGBEg==
+
+"@fontsource/licorice@^4.5.5":
+  version "4.5.5"
+  resolved "https://registry.yarnpkg.com/@fontsource/licorice/-/licorice-4.5.5.tgz#a41e90648a15c22fef30572aa978e56a7f4ea938"
+  integrity sha512-V8q5ZyRfDpE9GRvupPDKH95bEFw38pPU2y5GLw8iaOmHYSLJTD3am3b5kB1HiO3MPgj4p/+02IXRrSzl/xRRDw==
+
+"@fontsource/mr-de-haviland@^4.5.6":
+  version "4.5.6"
+  resolved "https://registry.yarnpkg.com/@fontsource/mr-de-haviland/-/mr-de-haviland-4.5.6.tgz#e53e55fdf695f4455ffa780772797b4926ee7054"
+  integrity sha512-0JtQCeBi5SagpBsAS4YalEEOvqJlP/Qoejx3T7UC9sSXQXA40GVao1CDhM1efJlRR2W1zaMi0uGuNJAlWqIEYw==
+
 "@fontsource/roboto@^4.5.5":
   version "4.5.5"
   resolved "https://registry.npmjs.org/@fontsource/roboto/-/roboto-4.5.5.tgz"
@@ -1162,12 +1182,7 @@ csstype@^3.0.2:
   resolved "https://registry.npmjs.org/csstype/-/csstype-3.0.11.tgz"
   integrity sha512-sa6P2wJ+CAbgyy4KFssIb/JNMLxFvKF1pCYCSXS8ZMuqZnMsrxqI2E5sPyoTpxoPU/gVZMzr2zjOfg8GIZOMsw==
 
-date-fns@^2.0.1, date-fns@^2.24.0:
-  version "2.28.0"
-  resolved "https://registry.npmjs.org/date-fns/-/date-fns-2.28.0.tgz"
-  integrity sha512-8d35hViGYx/QH0icHYCeLmsLmMUheMmTyV9Fcm6gvNwdw31yXXH+O85sOBJ+OLnLQMKZowvpKb6FgMIQjcpvQw==
-
-date-fns@^2.28.0:
+date-fns@^2.0.1, date-fns@^2.24.0, date-fns@^2.28.0:
   version "2.28.0"
   resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.28.0.tgz#9570d656f5fc13143e50c975a3b6bbeb46cd08b2"
   integrity sha512-8d35hViGYx/QH0icHYCeLmsLmMUheMmTyV9Fcm6gvNwdw31yXXH+O85sOBJ+OLnLQMKZowvpKb6FgMIQjcpvQw==

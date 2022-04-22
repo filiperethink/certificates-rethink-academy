@@ -1,5 +1,9 @@
 import "@fontsource/roboto/100.css";
 import "@fontsource/roboto/300.css";
+import "@fontsource/arizonia";
+import "@fontsource/mr-de-haviland";
+import "@fontsource/clicker-script";
+import "@fontsource/licorice";
 
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";

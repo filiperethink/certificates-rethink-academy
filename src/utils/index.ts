@@ -29,4 +29,32 @@ const handleValidadeValues = (values: any) => {
   return true;
 };
 
-export default { handleFormatDate, handleValidadeValues, getCurrentYear };
+const listFonts = [
+  "cursive",
+  "Arizonia",
+  "Mr De Haviland",
+  "Clicker Script",
+  "Licorice",
+];
+
+let currentFontIndex = listFonts.indexOf("cursive");
+
+const getNextFont = (): string => {
+  const nextFontIndex = currentFontIndex + 1;
+  if (currentFontIndex === listFonts.length - 1) {
+    currentFontIndex = 0;
+    const nextFont = listFonts[currentFontIndex];
+    return nextFont;
+  } else {
+    currentFontIndex = nextFontIndex;
+    const nextFont = listFonts[nextFontIndex];
+    return nextFont;
+  }
+};
+export default {
+  handleFormatDate,
+  handleValidadeValues,
+  getCurrentYear,
+  getNextFont,
+  listFonts,
+};

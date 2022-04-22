@@ -1,8 +1,7 @@
 import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
-import { Icon, Image } from "@chakra-ui/react";
+import { Box, Divider, Image, Tag, TagLabel, Tooltip } from "@chakra-ui/react";
 import { ptBR } from "date-fns/locale";
-import { useState } from "react";
 import {
   FormControl,
   FormLabel,
@@ -23,6 +22,7 @@ type FormPropsType = {
   teacherName: string;
   courseName: string;
   duration: string;
+  onSelectFont: () => void;
   setStudentName: (value: string) => void;
   setTeacherName: (value: string) => void;
   setCourseName: (value: string) => void;
@@ -44,14 +44,15 @@ function Form({
   teacherName,
   courseName,
   duration,
+  startDate,
+  endDate,
   setStudentName,
   setTeacherName,
   setCourseName,
   setDuration,
   setEndDate,
   setStartDate,
-  startDate,
-  endDate,
+  onSelectFont,
 }: FormPropsType) {
   const handleStatDate = (date: Date) => {
     const formattedDate = Utils.handleFormatDate(date);
@@ -212,11 +213,52 @@ function Form({
           />
         </FormControl>
       </Flex>
+      <Flex gap={2}>
+        <Tooltip
+          label='Clique para alterar a font da assinatura.'
+          placement='top'
+        >
+          <Button
+            onClick={onSelectFont}
+            fontSize='12px'
+            _hover={{
+              bg: "brand.base",
+            }}
+            _focus={{
+              outline: "none",
+            }}
+            _active={{
+              outline: "none",
+              ringColor: "brand.base",
+              ringOffsetColor: "brand.base",
 
-      <Flex gap={4} width='100%' mt={4}>
+              bg: "brand.details",
+            }}
+            bg='brand.baseOff'
+            leftIcon={<Image width={15} src='/assets/refresh-cw.svg' />}
+          >
+            Assinar Certificado
+          </Button>
+        </Tooltip>
+      </Flex>
+      <Box mt={12} h='0.3' bg='brand.bgOff' />
+      <Flex gap={4} width='100%'>
         <Button
           fontSize='12px'
           bg='brand.details'
+          _hover={{
+            bg: "brand.base",
+          }}
+          _focus={{
+            outline: "none",
+          }}
+          _active={{
+            outline: "none",
+            ringColor: "brand.base",
+            ringOffsetColor: "brand.base",
+
+            bg: "brand.details",
+          }}
           leftIcon={<Image width={15} src='/assets/file-text.svg' />}
         >
           Baixar em PDF
@@ -224,6 +266,19 @@ function Form({
         <Button
           fontSize='12px'
           bg='brand.details'
+          _hover={{
+            bg: "brand.base",
+          }}
+          _focus={{
+            outline: "none",
+          }}
+          _active={{
+            outline: "none",
+            ringColor: "brand.base",
+            ringOffsetColor: "brand.base",
+
+            bg: "brand.details",
+          }}
           leftIcon={<Image width={15} src='/assets/image.svg' />}
         >
           Baixar em JPG
