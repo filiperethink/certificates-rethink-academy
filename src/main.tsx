@@ -6,20 +6,20 @@ import "@fontsource/clicker-script";
 import "@fontsource/licorice";
 
 import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
+import ReactDOM from "react-dom";
 import { ChakraProvider, ColorModeScript } from "@chakra-ui/react";
 
 import CustomRoutes from "./routes";
 import customTheme from "./theme";
 
 const rootElement = document.getElementById("root");
-const root = createRoot(rootElement as Element);
 
-root.render(
+ReactDOM.render(
   <StrictMode>
     <ChakraProvider theme={customTheme}>
       <ColorModeScript initialColorMode={customTheme.config.initialColorMode} />
       <CustomRoutes />
     </ChakraProvider>
-  </StrictMode>
+  </StrictMode>,
+  rootElement
 );
