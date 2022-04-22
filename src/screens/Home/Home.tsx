@@ -10,6 +10,7 @@ import { CustomDrawer, Form } from "../../components";
 import Certificates from "../Certificates/Certificates";
 import utils from "../../utils";
 
+import settingsIcon from "/settings.svg";
 type HomePropsType = {};
 function Home({}: HomePropsType) {
   const toast = useToast();
@@ -70,7 +71,7 @@ function Home({}: HomePropsType) {
           fontSize='12px'
           bg='brand.details'
         >
-          <Image width={18} src='/assets/settings.svg' />
+          <Image width={18} src={settingsIcon} />
         </Button>
       </Tooltip>
 

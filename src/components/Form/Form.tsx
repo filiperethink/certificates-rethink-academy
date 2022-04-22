@@ -2,6 +2,11 @@ import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
 import { Box, Divider, Image, Tag, TagLabel, Tooltip } from "@chakra-ui/react";
 import { ptBR } from "date-fns/locale";
+
+import refredIcon from "/refresh-cw.svg";
+import fileTextIcon from "/file-text.svg";
+import imageIcon from "/image.svg";
+
 import {
   FormControl,
   FormLabel,
@@ -235,7 +240,7 @@ function Form({
               bg: "brand.details",
             }}
             bg='brand.baseOff'
-            leftIcon={<Image width={15} src='/assets/refresh-cw.svg' />}
+            leftIcon={<Image width={15} src={refredIcon} />}
           >
             Assinar Certificado
           </Button>
@@ -259,7 +264,7 @@ function Form({
 
             bg: "brand.details",
           }}
-          leftIcon={<Image width={15} src='/assets/file-text.svg' />}
+          leftIcon={<Image width={15} src={fileTextIcon} />}
         >
           Baixar em PDF
         </Button>
@@ -279,7 +284,7 @@ function Form({
 
             bg: "brand.details",
           }}
-          leftIcon={<Image width={15} src='/assets/image.svg' />}
+          leftIcon={<Image width={15} src={imageIcon} />}
         >
           Baixar em JPG
         </Button>

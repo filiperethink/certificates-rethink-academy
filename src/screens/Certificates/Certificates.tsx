@@ -1,5 +1,8 @@
 import { Box, Flex, Heading, Image, Text } from "@chakra-ui/react";
 import utils from "../../utils";
+import arrowIcon from "/arrow.svg";
+import logoRa from "/logo-ra.png";
+import logoMinRa from "/logo-min.svg";
 
 type CertificatesPropsType = {
   studentName: string;
@@ -44,7 +47,7 @@ export default function Certificates({
             CERTIFICADO
           </Heading>
           <Image
-            src='/assets/logo-min.svg'
+            src={logoMinRa}
             w={30}
             h={20}
             position='absolute'
@@ -72,7 +75,7 @@ export default function Certificates({
                   position='absolute'
                   top={2}
                   left={-2}
-                  src='/assets/arrow.svg'
+                  src={arrowIcon}
                   color='brand.details'
                   w={2}
                   h={2}
@@ -129,13 +132,7 @@ export default function Certificates({
                   alignItems='center'
                   justifyContent='center'
                 >
-                  <Image
-                    w={74}
-                    height={61}
-                    mt={4}
-                    mb={4}
-                    src='/assets/logo-ra.png'
-                  />
+                  <Image w={74} height={61} mt={4} mb={4} src={logoRa} />
                   <Text fontWeight='light' color='brand.base'>
                     Rethink Academy
                   </Text>
