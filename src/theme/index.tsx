@@ -112,13 +112,8 @@ const fonts = {
   body: "Roboto, sans-serif",
 };
 
-const config: ThemeConfig = {
-  initialColorMode: "light",
-  useSystemColorMode: false,
-};
 const customTheme = extendTheme({
   ...theme,
-  config,
   borderRadius,
   spacing,
   sizes,

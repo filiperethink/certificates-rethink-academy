@@ -17,7 +17,6 @@ const rootElement = document.getElementById("root");
 ReactDOM.render(
   <StrictMode>
     <ChakraProvider theme={customTheme}>
-      <ColorModeScript initialColorMode={customTheme.config.initialColorMode} />
       <CustomRoutes />
     </ChakraProvider>
   </StrictMode>,

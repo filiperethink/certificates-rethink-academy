@@ -37,20 +37,12 @@ const listFonts = [
   "Licorice",
 ];
 
-let currentFontIndex = listFonts.indexOf("cursive");
-
+// Create a function that loop trough the listFonts and return one randomized.
 const getNextFont = (): string => {
-  const nextFontIndex = currentFontIndex + 1;
-  if (currentFontIndex === listFonts.length - 1) {
-    currentFontIndex = 0;
-    const nextFont = listFonts[currentFontIndex];
-    return nextFont;
-  } else {
-    currentFontIndex = nextFontIndex;
-    const nextFont = listFonts[nextFontIndex];
-    return nextFont;
-  }
+  const randomFont = listFonts[Math.floor(Math.random() * listFonts.length)];
+  return randomFont;
 };
+
 export default {
   handleFormatDate,
   handleValidadeValues,

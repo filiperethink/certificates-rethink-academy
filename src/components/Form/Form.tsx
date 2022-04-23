@@ -1,11 +1,22 @@
 import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
-import { Box, Divider, Image, Tag, TagLabel, Tooltip } from "@chakra-ui/react";
+import {
+  Box,
+  CheckboxGroup,
+  Divider,
+  Image,
+  Switch,
+  Tag,
+  TagLabel,
+  Tooltip,
+} from "@chakra-ui/react";
 import { ptBR } from "date-fns/locale";
 
 import refredIcon from "/refresh-cw.svg";
 import fileTextIcon from "/file-text.svg";
 import imageIcon from "/image.svg";
+import moonIcon from "/moon.svg";
+import sunIcon from "/sun.svg";
 
 import {
   FormControl,
@@ -27,13 +38,6 @@ type FormPropsType = {
   teacherName: string;
   courseName: string;
   duration: string;
-  onSelectFont: () => void;
-  setStudentName: (value: string) => void;
-  setTeacherName: (value: string) => void;
-  setCourseName: (value: string) => void;
-  setDuration: (value: string) => void;
-  setStartDate: (value: any) => void;
-  setEndDate: (value: any) => void;
   startDate: {
     formattedDate: string;
     date: Date;
@@ -42,6 +46,15 @@ type FormPropsType = {
     formattedDate: string;
     date: Date;
   };
+  currentTheme: string;
+  onSelectFont: () => void;
+  setStudentName: (value: string) => void;
+  setTeacherName: (value: string) => void;
+  setCourseName: (value: string) => void;
+  setDuration: (value: string) => void;
+  setStartDate: (value: any) => void;
+  setEndDate: (value: any) => void;
+  onThemeChange: () => void;
 };
 
 function Form({
@@ -51,6 +64,7 @@ function Form({
   duration,
   startDate,
   endDate,
+  currentTheme,
   setStudentName,
   setTeacherName,
   setCourseName,
@@ -58,6 +72,7 @@ function Form({
   setEndDate,
   setStartDate,
   onSelectFont,
+  onThemeChange,
 }: FormPropsType) {
   const handleStatDate = (date: Date) => {
     const formattedDate = Utils.handleFormatDate(date);
@@ -245,7 +260,39 @@ function Form({
             Assinar Certificado
           </Button>
         </Tooltip>
+        <Tooltip
+          label='Clique para alterar o tema do certificado.'
+          placement='top'
+        >
+          <Button
+            onClick={onThemeChange}
+            fontSize='12px'
+            _hover={{
+              bg: "brand.base",
+            }}
+            _focus={{
+              outline: "none",
+            }}
+            _active={{
+              outline: "none",
+              ringColor: "brand.base",
+              ringOffsetColor: "brand.base",
+
+              bg: "brand.details",
+            }}
+            bg='brand.baseOff'
+            leftIcon={
+              <Image
+                width={15}
+                src={currentTheme === "light" ? moonIcon : sunIcon}
+              />
+            }
+          >
+            {currentTheme === "light" ? "Tema Escuro" : "Tema Claro"}
+          </Button>
+        </Tooltip>
       </Flex>
+
       <Box mt={12} h='0.3' bg='brand.bgOff' />
       <Flex gap={4} width='100%'>
         <Button

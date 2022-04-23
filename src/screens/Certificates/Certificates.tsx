@@ -18,6 +18,7 @@ type CertificatesPropsType = {
     date: Date;
   };
   selectedFont: string;
+  currentTheme: string;
 };
 export default function Certificates({
   studentName,
@@ -27,7 +28,11 @@ export default function Certificates({
   startDate,
   endDate,
   selectedFont,
+  currentTheme,
 }: CertificatesPropsType) {
+  const textColor = currentTheme === "dark" ? "brand.base" : "brand.bg";
+  const bgHeaderColor = currentTheme === "light" ? "brand.details" : "brand.bg";
+  const bhHeader = currentTheme === "light" ? "brand.bg" : "brand.details";
   return (
     <Flex
       alignItems='center'
@@ -36,14 +41,19 @@ export default function Certificates({
       width='full'
       height='100vh'
     >
-      <Box position='relative' w={1200} height={700} bgColor='brand.bg'>
+      <Box
+        position='relative'
+        w={1200}
+        height={700}
+        bgColor={currentTheme === "dark" ? "brand.bg" : "brand.base"}
+      >
         <Flex
           alignItems='center'
           justifyContent='center'
           height={130}
-          bgColor='brand.details'
+          bgColor={bhHeader}
         >
-          <Heading color='brand.bg' fontSize={70} fontWeight='thin'>
+          <Heading color={bgHeaderColor} fontSize={70} fontWeight='thin'>
             CERTIFICADO
           </Heading>
           <Image
@@ -55,7 +65,7 @@ export default function Certificates({
             right={8}
           />
         </Flex>
-        <Box mt={2} height={2} bgColor='brand.details'></Box>
+        <Box mt={2} height={2} bgColor={bhHeader}></Box>
         <Flex justifyContent='center' alignItems='center'>
           <Box mt={16}>
             <Flex
@@ -80,28 +90,29 @@ export default function Certificates({
                   w={2}
                   h={2}
                 />
-                <Text fontWeight='light' color='brand.base' fontSize={20}>
+                <Text fontWeight='light' color={textColor} fontSize={20}>
                   Rethink certifica que
                 </Text>
               </Flex>
-              <Text fontWeight='thin' color='brand.base' fontSize={45}>
-                {studentName}
+              <Text fontWeight='thin' color={textColor} fontSize={45}>
+                {studentName || "Nome do aluno"}
               </Text>
-              <Text fontWeight='medium' color='brand.base' fontSize={14}>
+              <Text fontWeight='medium' color={textColor} fontSize={14}>
                 ID RA-001
               </Text>
               <Text
                 maxW='container.sm'
                 textAlign='center'
                 fontWeight='light'
-                color='brand.base'
+                color={textColor}
                 fontSize={20}
               >
                 <>
-                  concluiu o curso de <Text as='b'>{courseName}</Text>,
-                  ministrado por {teacherName}. Com um total de {duration}{" "}
-                  horas, realizado nos dias {startDate.formattedDate} a{" "}
-                  {endDate.formattedDate}
+                  concluiu o curso de{" "}
+                  <Text as='b'>{courseName || "Nome do Curso"}</Text>,
+                  ministrado por {teacherName || "Professor(a)"}. Com um total
+                  de {duration} horas, realizado nos dias{" "}
+                  {startDate.formattedDate} a {endDate.formattedDate}
                 </>
               </Text>
               <Flex
@@ -117,14 +128,14 @@ export default function Certificates({
                 >
                   <Text
                     fontSize={30}
-                    color='brand.base'
+                    color={textColor}
                     fontFamily={selectedFont}
                   >
-                    {teacherName}
+                    {teacherName || ""}
                   </Text>
                   <Box w='200px' height='1' bg='brand.details' mb={2} />
-                  <Text fontWeight='light' color='brand.base'>
-                    {teacherName}
+                  <Text fontWeight='light' color={textColor}>
+                    {teacherName || "Professor(a)"}
                   </Text>
                 </Flex>
                 <Flex
@@ -133,10 +144,10 @@ export default function Certificates({
                   justifyContent='center'
                 >
                   <Image w={74} height={61} mt={4} mb={4} src={logoRa} />
-                  <Text fontWeight='light' color='brand.base'>
+                  <Text fontWeight='light' color={textColor}>
                     Rethink Academy
                   </Text>
-                  <Text fontWeight='light' color='brand.base'>
+                  <Text fontWeight='light' color={textColor}>
                     {utils.getCurrentYear()}
                   </Text>
                 </Flex>
