@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Image, useDisclosure, Button, Tooltip, Flex } from "@chakra-ui/react";
 import { CustomDrawer, Form } from "../../components";
 import Certificates from "../Certificates/Certificates";
@@ -7,6 +7,8 @@ import utils from "../../utils";
 import settingsIcon from "/settings.svg";
 type HomePropsType = {};
 function Home({}: HomePropsType) {
+  const ref = useRef() as React.MutableRefObject<HTMLInputElement>;
+
   const [currentTheme, setCurrentTheme] = useState("dark");
   const [selectedFont, setSelectedFont] = useState("cursive");
 
@@ -55,6 +57,7 @@ function Home({}: HomePropsType) {
           onSelectFont={onSelectFont}
           onThemeChange={onThemeChange}
           currentTheme={currentTheme}
+          ref={ref}
         />
       </CustomDrawer>
       <Flex bg='brand.baseOff'>
@@ -78,6 +81,7 @@ function Home({}: HomePropsType) {
         </Tooltip>
 
         <Certificates
+          ref={ref}
           studentName={studentName}
           teacherName={teacherName}
           courseName={courseName}
