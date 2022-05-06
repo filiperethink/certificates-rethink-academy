@@ -2,7 +2,7 @@ import { Box, Flex, Heading, Image, Text } from "@chakra-ui/react";
 
 import utils from "../../utils";
 import arrowIcon from "/arrow.svg";
-import logoRa from "/logo-ra.png";
+import logoRa from "/ra-logo.png";
 import logoMinRa from "/min-logo-dark.png";
 import logoMinRaDetails from "/min-logo-details.png";
 import { forwardRef } from "react";
@@ -52,6 +52,7 @@ const Certificates = forwardRef(
         height='100vh'
       >
         <Box
+          id='pdf-container'
           ref={ref}
           position='relative'
           w={1200}
@@ -127,8 +128,9 @@ const Certificates = forwardRef(
                   </>
                 </Text>
                 <Flex
+                  mt={10}
                   maxW='900px'
-                  width='75%'
+                  width='80%'
                   justifyContent='space-between'
                   alignItems='flex-end'
                 >
@@ -144,7 +146,13 @@ const Certificates = forwardRef(
                     >
                       {teacherName || ""}
                     </Text>
-                    <Box w='200px' height='1' bg='brand.details' mb={2} />
+                    <Box
+                      w='200px'
+                      height='1'
+                      bg='brand.details'
+                      mb={2}
+                      mt={1}
+                    />
                     <Text fontWeight='light' color={textColor}>
                       {teacherName || "Professor(a)"}
                     </Text>
@@ -154,13 +162,7 @@ const Certificates = forwardRef(
                     alignItems='center'
                     justifyContent='center'
                   >
-                    <Image w={74} height={61} mt={4} mb={4} src={logoRa} />
-                    <Text fontWeight='light' color={textColor}>
-                      Rethink Academy
-                    </Text>
-                    <Text fontWeight='light' color={textColor}>
-                      {utils.getCurrentYear()}
-                    </Text>
+                    <Image w={125} height={50} mt={4} mb={4} src={logoRa} />
                   </Flex>
                 </Flex>
               </Flex>

@@ -1,6 +1,8 @@
 import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
 import ReactToPdf from "react-to-pdf";
+import html2canvas from "html2canvas";
+import { downloadFile } from "fs-browsers";
 
 import { Box, Image, Tooltip } from "@chakra-ui/react";
 import { ptBR } from "date-fns/locale";
@@ -25,10 +27,10 @@ import {
 } from "@chakra-ui/react";
 
 import Utils from "../../utils";
-import { forwardRef } from "react";
+import { forwardRef, MutableRefObject } from "react";
 
 type FormPropsType = {
-  ref: React.MutableRefObject<HTMLInputElement>;
+  ref: React.ForwardedRef<HTMLInputElement>;
   studentName: string;
   teacherName: string;
   courseName: string;
@@ -80,6 +82,15 @@ const Form = forwardRef(
     };
     const onComplete = () => {
       console.log("Done");
+    };
+
+    const handleDownloadImage = async () => {
+      const element = document.getElementById("#pdf-container");
+      // @ts-ignore
+      const canvas = await html2canvas(ref.current);
+
+      const data = canvas.toDataURL("image/jpg");
+      downloadFile(data, "certificate.jpg");
     };
 
     const handleStatDate = (date: Date) => {
@@ -335,6 +346,27 @@ const Form = forwardRef(
               );
             }}
           </ReactToPdf>
+          <Button
+            fontSize='12px'
+            bg='brand.details'
+            _hover={{
+              bg: "brand.base",
+            }}
+            _focus={{
+              outline: "none",
+            }}
+            _active={{
+              outline: "none",
+              ringColor: "brand.base",
+              ringOffsetColor: "brand.base",
+
+              bg: "brand.details",
+            }}
+            onClick={handleDownloadImage}
+            leftIcon={<Image width={15} src={imageIcon} />}
+          >
+            Baixar em PNG
+          </Button>
         </Flex>
       </Flex>
     );

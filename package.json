@@ -18,6 +18,8 @@
     "@fontsource/roboto": "^4.5.5",
     "date-fns": "^2.28.0",
     "framer-motion": "^6",
+    "fs-browsers": "^1.1.6",
+    "html2canvas": "^1.4.1",
     "react": "^17.0.0",
     "react-datepicker": "^4.7.0",
     "react-dom": "^17.0.0",
