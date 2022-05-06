@@ -29,7 +29,6 @@ function Home({}: HomePropsType) {
 
   const onSelectFont = () => {
     const randomFont = utils.getNextFont();
-    console.log({ randomFont });
     setSelectedFont(randomFont);
   };
 
