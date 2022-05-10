@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import html2canvas from "html2canvas";
 import { downloadFile } from "fs-browsers";
 
@@ -118,6 +118,12 @@ function Home({}: HomePropsType) {
 
     onClose();
   };
+
+  useEffect(() => {
+    setTimeout(() => {
+      onOpen();
+    }, 2000);
+  }, []);
   return (
     <>
       <CustomDrawer isOpen={isOpen} onClose={onClose}>
