@@ -63,15 +63,19 @@ const ValidateScreen = () => {
     );
   }
   return (
-    <CertificateScreen
-      courseName={certificate?.courseName}
-      studentName={certificate?.studentName}
-      teacherName={certificate?.teacherName}
-      duration={certificate?.duration}
-      startDate={certificate?.startDate}
-      endDate={certificate?.endDate}
-      id={certificate?.id}
-    />
+    <Flex bg='brand.baseOff'>
+      <CertificateScreen
+        courseName={certificate?.courseName}
+        studentName={certificate?.studentName}
+        teacherName={certificate?.teacherName}
+        duration={certificate?.duration}
+        startDate={certificate?.startDate}
+        endDate={certificate?.endDate}
+        currentTheme={certificate?.currentTheme}
+        selectedFont={certificate?.selectedFont}
+        id={certificate?.id}
+      />
+    </Flex>
   );
 };
 

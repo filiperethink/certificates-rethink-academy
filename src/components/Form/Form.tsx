@@ -1,8 +1,6 @@
 import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
 import ReactToPdf from "react-to-pdf";
-import html2canvas from "html2canvas";
-import { downloadFile } from "fs-browsers";
 
 import { Box, Image, Tooltip } from "@chakra-ui/react";
 import { ptBR } from "date-fns/locale";
@@ -27,9 +25,13 @@ import {
 } from "@chakra-ui/react";
 
 import Utils from "../../utils";
-import { forwardRef, MutableRefObject } from "react";
+import { forwardRef } from "react";
 import { Services } from "../../services";
-import utils from "../../utils";
+
+type HandleDownloadImageParams = {
+  type: string;
+  generate?: () => void;
+};
 
 type FormPropsType = {
   ref: React.ForwardedRef<HTMLInputElement>;
@@ -46,7 +48,6 @@ type FormPropsType = {
     date: Date;
   };
   currentTheme: string;
-  onClose: () => void;
   onSelectFont: () => void;
   setStudentName: (value: string) => void;
   setTeacherName: (value: string) => void;
@@ -55,7 +56,14 @@ type FormPropsType = {
   setStartDate: (value: any) => void;
   setEndDate: (value: any) => void;
   onThemeChange: () => void;
+  handleDownloadImage: ({}: HandleDownloadImageParams) => Promise<void>;
   id: string;
+};
+
+const options = {
+  orientation: "landscape",
+  unit: "px",
+  format: [397, 678],
 };
 
 const Form = forwardRef(
@@ -69,7 +77,6 @@ const Form = forwardRef(
       startDate,
       endDate,
       currentTheme,
-      onClose,
       setStudentName,
       setTeacherName,
       setCourseName,
@@ -78,52 +85,10 @@ const Form = forwardRef(
       setStartDate,
       onSelectFont,
       onThemeChange,
+      handleDownloadImage,
     }: FormPropsType,
     ref: React.ForwardedRef<HTMLInputElement>
   ) => {
-    const options = {
-      orientation: "landscape",
-      unit: "px",
-      format: [397, 678],
-    };
-
-    type HandleDownloadImageParams = {
-      type: string;
-      generate?: () => void;
-    };
-    const handleDownloadImage = async ({
-      type,
-      generate = () => {},
-    }: HandleDownloadImageParams) => {
-      if (type === "PDF") {
-        generate();
-        Services.saveCertificate({
-          studentName,
-          teacherName,
-          courseName,
-          duration,
-          startDate,
-          endDate,
-          id,
-        });
-      } else {
-        // @ts-ignore
-        const canvas = await html2canvas(ref.current);
-        const data = canvas.toDataURL("image/jpg");
-        downloadFile(data, "certificate.jpg");
-        Services.saveCertificate({
-          studentName,
-          teacherName,
-          courseName,
-          duration,
-          startDate,
-          endDate,
-          id,
-        });
-      }
-      onClose();
-    };
-
     const handleDate = (date: Date) => {
       const formattedDate = Utils.handleFormatDate(date);
       setStartDate(formattedDate);

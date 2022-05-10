@@ -10,6 +10,8 @@ import {
 import FirebaseInstance from "./config";
 
 export type CertificateParams = {
+  selectedFont: string;
+  currentTheme: string;
   studentName: string;
   teacherName: string;
   courseName: string;
@@ -27,13 +29,13 @@ export type CertificateParams = {
 
 const saveCertificate = async (certificate: CertificateParams) => {
   try {
-    const certificateRef = await setDoc(
+    await setDoc(
       doc(FirebaseInstance.db, "certificates", certificate.id),
       certificate
     );
-    console.log("Document written with ID: ", certificateRef);
   } catch (e) {
     console.error("Error adding document: ", e);
+    return e;
   }
 };
 

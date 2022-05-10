@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { HomeScreen, ValidateScreen } from "../screens";
+import { HomeScreen, ValidateScreen, EmptyScreen } from "../screens";
 
 export default function CustomRoutes() {
   return (
@@ -7,6 +7,7 @@ export default function CustomRoutes() {
       <Routes>
         <Route path='/' element={<HomeScreen />} />
         <Route path='/validate/:id' element={<ValidateScreen />} />
+        <Route path='*' element={<EmptyScreen />} />
       </Routes>
     </BrowserRouter>
   );
