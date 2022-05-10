@@ -43,10 +43,23 @@ const getNextFont = (): string => {
   return randomFont;
 };
 
+const generateRandomId = () => {
+  let ts = String(new Date().getTime()),
+    i = 0,
+    out = "";
+
+  for (i = 0; i < ts.length; i += 6) {
+    out += Number(ts.substring(i, 6)).toString(36);
+  }
+
+  return "RA-" + out;
+};
+
 export default {
   handleFormatDate,
   handleValidadeValues,
   getCurrentYear,
+  generateRandomId,
   getNextFont,
   listFonts,
 };

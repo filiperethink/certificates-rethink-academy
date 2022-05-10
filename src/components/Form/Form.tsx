@@ -28,6 +28,8 @@ import {
 
 import Utils from "../../utils";
 import { forwardRef, MutableRefObject } from "react";
+import { Services } from "../../services";
+import utils from "../../utils";
 
 type FormPropsType = {
   ref: React.ForwardedRef<HTMLInputElement>;
@@ -44,6 +46,7 @@ type FormPropsType = {
     date: Date;
   };
   currentTheme: string;
+  onClose: () => void;
   onSelectFont: () => void;
   setStudentName: (value: string) => void;
   setTeacherName: (value: string) => void;
@@ -52,11 +55,13 @@ type FormPropsType = {
   setStartDate: (value: any) => void;
   setEndDate: (value: any) => void;
   onThemeChange: () => void;
+  id: string;
 };
 
 const Form = forwardRef(
   (
     {
+      id,
       studentName,
       teacherName,
       courseName,
@@ -64,6 +69,7 @@ const Form = forwardRef(
       startDate,
       endDate,
       currentTheme,
+      onClose,
       setStudentName,
       setTeacherName,
       setCourseName,
@@ -80,20 +86,45 @@ const Form = forwardRef(
       unit: "px",
       format: [397, 678],
     };
-    const onComplete = () => {
-      console.log("Done");
+
+    type HandleDownloadImageParams = {
+      type: string;
+      generate?: () => void;
+    };
+    const handleDownloadImage = async ({
+      type,
+      generate = () => {},
+    }: HandleDownloadImageParams) => {
+      if (type === "PDF") {
+        generate();
+        Services.saveCertificate({
+          studentName,
+          teacherName,
+          courseName,
+          duration,
+          startDate,
+          endDate,
+          id,
+        });
+      } else {
+        // @ts-ignore
+        const canvas = await html2canvas(ref.current);
+        const data = canvas.toDataURL("image/jpg");
+        downloadFile(data, "certificate.jpg");
+        Services.saveCertificate({
+          studentName,
+          teacherName,
+          courseName,
+          duration,
+          startDate,
+          endDate,
+          id,
+        });
+      }
+      onClose();
     };
 
-    const handleDownloadImage = async () => {
-      const element = document.getElementById("#pdf-container");
-      // @ts-ignore
-      const canvas = await html2canvas(ref.current);
-
-      const data = canvas.toDataURL("image/jpg");
-      downloadFile(data, "certificate.jpg");
-    };
-
-    const handleStatDate = (date: Date) => {
+    const handleDate = (date: Date) => {
       const formattedDate = Utils.handleFormatDate(date);
       setStartDate(formattedDate);
     };
@@ -202,7 +233,7 @@ const Form = forwardRef(
             <DatePicker
               locale={ptBR}
               dateFormat='dd/MM/yyyy'
-              onChange={handleStatDate}
+              onChange={handleDate}
               selected={startDate.date}
               customInput={
                 <Input
@@ -316,7 +347,7 @@ const Form = forwardRef(
           <ReactToPdf
             x={0.8}
             y={1.5}
-            onComplete={onComplete}
+            onComplete={() => {}}
             targetRef={ref}
             options={options}
           >
@@ -338,7 +369,9 @@ const Form = forwardRef(
 
                     bg: "brand.details",
                   }}
-                  onClick={toPdf}
+                  onClick={() =>
+                    handleDownloadImage({ type: "PDF", generate: toPdf })
+                  }
                   leftIcon={<Image width={15} src={fileTextIcon} />}
                 >
                   Baixar em PDF
@@ -362,7 +395,7 @@ const Form = forwardRef(
 
               bg: "brand.details",
             }}
-            onClick={handleDownloadImage}
+            onClick={() => handleDownloadImage({ type: "JPG" })}
             leftIcon={<Image width={15} src={imageIcon} />}
           >
             Baixar em PNG

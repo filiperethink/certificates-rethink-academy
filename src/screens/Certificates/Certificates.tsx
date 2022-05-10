@@ -1,14 +1,14 @@
+import { forwardRef } from "react";
 import { Box, Flex, Heading, Image, Text } from "@chakra-ui/react";
 
-import utils from "../../utils";
 import arrowIcon from "/arrow.svg";
 import logoRa from "/ra-logo.png";
 import logoMinRa from "/min-logo-dark.png";
 import logoMinRaDetails from "/min-logo-details.png";
-import { forwardRef } from "react";
 
 type CertificatesPropsType = {
   ref: React.MutableRefObject<HTMLInputElement>;
+  id: string;
   studentName: string;
   teacherName: string;
   courseName: string;
@@ -21,20 +21,21 @@ type CertificatesPropsType = {
     formattedDate: string;
     date: Date;
   };
-  selectedFont: string;
-  currentTheme: string;
+  selectedFont?: string;
+  currentTheme?: string;
 };
 const Certificates = forwardRef(
   (
     {
+      id,
       studentName,
       teacherName,
       courseName,
       duration,
       startDate,
       endDate,
-      selectedFont,
-      currentTheme,
+      selectedFont = "cursive",
+      currentTheme = "dark",
     }: CertificatesPropsType,
     ref: React.ForwardedRef<HTMLInputElement>
   ) => {
@@ -110,7 +111,7 @@ const Certificates = forwardRef(
                   {studentName || "Nome do aluno"}
                 </Text>
                 <Text fontWeight='medium' color={textColor} fontSize={14}>
-                  ID RA-001
+                  ID {id.toLocaleUpperCase()}
                 </Text>
                 <Text
                   maxW='container.sm'

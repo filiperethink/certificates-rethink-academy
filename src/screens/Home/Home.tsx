@@ -5,8 +5,12 @@ import Certificates from "../Certificates/Certificates";
 import utils from "../../utils";
 
 import settingsIcon from "/settings.svg";
+
 type HomePropsType = {};
+
 function Home({}: HomePropsType) {
+  const id = utils.generateRandomId();
+
   const ref = useRef() as React.MutableRefObject<HTMLInputElement>;
 
   const [currentTheme, setCurrentTheme] = useState("dark");
@@ -41,6 +45,8 @@ function Home({}: HomePropsType) {
     <>
       <CustomDrawer isOpen={isOpen} onClose={onClose}>
         <Form
+          id={id}
+          onClose={onClose}
           studentName={studentName}
           teacherName={teacherName}
           courseName={courseName}
@@ -81,6 +87,7 @@ function Home({}: HomePropsType) {
 
         <Certificates
           ref={ref}
+          id={id}
           studentName={studentName}
           teacherName={teacherName}
           courseName={courseName}

@@ -7,7 +7,7 @@ import "@fontsource/licorice";
 
 import { StrictMode } from "react";
 import ReactDOM from "react-dom";
-import { ChakraProvider, ColorModeScript } from "@chakra-ui/react";
+import { ChakraProvider } from "@chakra-ui/react";
 
 import CustomRoutes from "./routes";
 import customTheme from "./theme";
