@@ -123,8 +123,8 @@ const Certificates = forwardRef(
                   <>
                     concluiu o curso de{" "}
                     <Text as='b'>{courseName || "Nome do Curso"}</Text>,
-                    ministrado por {teacherName || "Professor(a)"}. Com um total
-                    de {duration} horas, realizado nos dias{" "}
+                    ministrado por {teacherName || "Professor(a)"} e convidados.
+                    Com um total de {duration} horas, realizado entre os dias{" "}
                     {startDate.formattedDate} a {endDate.formattedDate}.
                   </>
                 </Text>
